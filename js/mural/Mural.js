@@ -11,6 +11,16 @@ const Mural = (function (_render, Filtro) {
 
   Filtro.on("filtrado", render)
 
+  login.on('login', () => {
+    cartoes = leCartoes()
+    render();
+  })
+
+  login.on('logout', () => {
+    cartoes = [];
+    render();
+  })
+
   function adiciona(cartao) {
     if (logado) {
       cartoes.push(cartao)
@@ -24,15 +34,21 @@ const Mural = (function (_render, Filtro) {
   }
 
   function leCartoes() {
-    return JSON.parse(localStorage.getItem('cartoes')).map(
-      (cartaoLocal) => new Cartao(cartaoLocal.conteudo, cartaoLocal.tipo)
-    ) || []
+    const json_result = JSON.parse(localStorage.getItem(usuario));
+    if(json_result){
+      return json_result.map(
+        (cartaoLocal) => new Cartao(cartaoLocal.conteudo, cartaoLocal.tipo)
+      )
+    } 
+    else {
+      return []
+    }
   }
 
   function salvaCartoes() {
     let cartoes_mapped = cartoes.map((cartao) => ({ conteudo: cartao.conteudo, tipo: cartao.tipo }))
 
-    localStorage.setItem('cartoes', JSON.stringify(cartoes_mapped));
+    localStorage.setItem(usuario, JSON.stringify(cartoes_mapped));
   }
 
   function preparaCartao(cartao){
