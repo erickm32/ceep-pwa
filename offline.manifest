@@ -1,6 +1,6 @@
 CACHE MANIFEST
 
-#v4
+#v7
 
 CACHE:
 css/estilos.css
@@ -13,8 +13,6 @@ css/loginStatus.css
 css/cartao.css
 css/novoCartao.css
 css/mural.css
-img/bin2.svg
-img/edit.svg
 js/lib/jquery.js
 js/lib/eventemitter2.js
 js/lib/KeyBoardNavigation.js
@@ -33,7 +31,8 @@ js/login/LoginUsuario.js
 js/mural/render/Mural_render.js
 js/mural/Mural.js
 js/cabecalho/novoCartao.js
-sw/registra.js
+img/bin2.svg
+img/edit.svg
 
 NETWORK:
 *
