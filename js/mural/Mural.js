@@ -1,7 +1,6 @@
 const Mural = (function (_render, Filtro) {
   "use strict"
   let cartoes = leCartoes();
-  cartoes.forEach(cartao => { preparaCartao(cartao) })
 
   const render = () => _render({
     cartoes: cartoes,
@@ -35,11 +34,13 @@ const Mural = (function (_render, Filtro) {
 
   function leCartoes() {
     const json_result = JSON.parse(localStorage.getItem(usuario));
-    if(json_result){
-      return json_result.map(
-        (cartaoLocal) => new Cartao(cartaoLocal.conteudo, cartaoLocal.tipo)
-      )
-    } 
+    if (json_result) {
+      return json_result.map((cartaoLocal) => {
+        let cartao = new Cartao(cartaoLocal.conteudo, cartaoLocal.tipo);
+        preparaCartao(cartao)
+        return cartao;
+      })
+    }
     else {
       return []
     }
@@ -51,7 +52,7 @@ const Mural = (function (_render, Filtro) {
     localStorage.setItem(usuario, JSON.stringify(cartoes_mapped));
   }
 
-  function preparaCartao(cartao){
+  function preparaCartao(cartao) {
     cartao.on("mudanca.**", salvaCartoes)
     cartao.on("remocao", () => {
       cartoes = cartoes.slice(0)
