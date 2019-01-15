@@ -46,12 +46,6 @@ const Mural = (function (_render, Filtro) {
     }
   }
 
-  function salvaCartoes() {
-    let cartoes_mapped = cartoes.map((cartao) => ({ conteudo: cartao.conteudo, tipo: cartao.tipo }))
-
-    localStorage.setItem(usuario, JSON.stringify(cartoes_mapped));
-  }
-
   function preparaCartao(cartao) {
     cartao.on("mudanca.**", salvaCartoes)
     cartao.on("remocao", () => {
@@ -60,6 +54,12 @@ const Mural = (function (_render, Filtro) {
       salvaCartoes()
       render()
     })
+  }
+
+  function salvaCartoes() {
+    let cartoes_mapped = cartoes.map((cartao) => ({ conteudo: cartao.conteudo, tipo: cartao.tipo }))
+
+    localStorage.setItem(usuario, JSON.stringify(cartoes_mapped));
   }
 
   return Object.seal({
