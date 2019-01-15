@@ -48,9 +48,9 @@ const Mural = (function (_render, Filtro) {
 
   function preparaCartao(cartao) {
     const urlImagens = Cartao.pegaImagens(cartao);
-    urlImagens.forEach( url => {
-      fetch(url).then( resposta => {
-        caches.open('ceep-imagens').then( cache => {
+    urlImagens.forEach(url => {
+      fetch(url).then(resposta => {
+        caches.open('ceep-imagens').then(cache => {
           cache.put(url, resposta)
         })
       })
